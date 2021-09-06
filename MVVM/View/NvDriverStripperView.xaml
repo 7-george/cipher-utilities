@@ -1,0 +1,312 @@
+﻿<UserControl x:Class="Cipher_Utilities.MVVM.View.NvDriverStripperView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Cipher_Utilities.MVVM.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="700"
+             Background="Transparent">
+    <UserControl.Resources>
+        <Storyboard x:Key="FadeIn">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="00:00:00" BeginTime="00:00:00" From="1.0" To="0.0"/>
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="00:00:0.25" BeginTime="00:00:00" From="0.0" To="1.0"/>
+        </Storyboard>
+        <Storyboard x:Key="PanelGrow" AutoReverse="True">
+            <DoubleAnimation Storyboard.TargetProperty="(Border.Height)"
+                                 From="25"
+                                 To="30"
+                                 Duration="0:0:0.05"/>
+            <ColorAnimation From="#2a6273"
+                                To="#19a4cf" 
+                                Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" 
+                                Duration="0:0:0.5"/>
+        </Storyboard>
+        <Storyboard x:Key="PanelOpaque">
+            <DoubleAnimation Storyboard.TargetProperty="(Border.Opacity)"
+                                 From="0.8"
+                                 To="1"
+                                 Duration="0:0:0.05"/>
+        </Storyboard>
+        <Storyboard x:Key="PanelReturnOpacity">
+            <DoubleAnimation Storyboard.TargetProperty="(Border.Opacity)"
+                                 From="1"
+                                 To="0.8"
+                                 Duration="0:0:0.05"/>
+        </Storyboard>
+        <Storyboard x:Key="GpuGrow">
+            <DoubleAnimation Storyboard.TargetProperty="(Image.Width)"
+                                 From="500"
+                                 To="600"
+                                 Duration="0:0:0.2"/>
+            <DoubleAnimation Storyboard.TargetProperty="(Image.Height)"
+                                 From="250"
+                                 To="300"
+                                 Duration="0:0:0.2"/>
+        </Storyboard>
+        <Storyboard x:Key="GpuReturnSize">
+            <DoubleAnimation Storyboard.TargetProperty="(Image.Width)"
+                                 From="600"
+                                 To="500"
+                                 Duration="0:0:0.05"/>
+            <DoubleAnimation Storyboard.TargetProperty="(Image.Height)"
+                                 From="300"
+                                 To="250"
+                                 Duration="0:0:0.05"/>
+        </Storyboard>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="305*"/>
+            <RowDefinition Height="102*"/>
+        </Grid.RowDefinitions>
+        <Grid.Triggers>
+            <EventTrigger RoutedEvent="Loaded">
+                <BeginStoryboard Storyboard="{StaticResource FadeIn}"/>
+            </EventTrigger>
+        </Grid.Triggers>
+
+
+        <Border Grid.Row="0"
+                Background="#a0d1de" 
+                Margin="77,98,43,59"
+                CornerRadius="5"
+                Opacity="0.3" Grid.RowSpan="2"/>
+        <Image Source="/Images/wavecircular.png" Margin="58,66,-58,59" Grid.RowSpan="2" Opacity="0.4"/>
+        <Image x:Name="Gpu"
+               Source="/Images/NvidiaRtx3090.png" 
+               Margin="18,-55,10,128"
+               Height="250"
+               Width="500"
+               MouseLeave="select_Leave"
+               MouseMove="Gpu_MouseMove">
+            <Image.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard Storyboard="{StaticResource GpuGrow}"/>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard Storyboard="{StaticResource GpuReturnSize}"/>
+                </EventTrigger>
+            </Image.Triggers>
+        </Image>
+
+        <Border x:Name="DduPanel"
+                Margin="98,265,349,22"
+                CornerRadius="5"
+                Opacity="0.8"
+                MouseLeave="select_Leave"
+                Background="#121212"
+                MouseMove="DduPanel_MouseMove">
+            <Border.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard Storyboard="{StaticResource PanelOpaque}"/>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard Storyboard="{StaticResource PanelReturnOpacity}"/>
+                </EventTrigger>
+            </Border.Triggers>
+
+            <TextBlock Text="always use DDU in safe mode before&#xA; installing a new nvidia graphics driver&#xA;"
+                FontFamily="/Fonts/#Dosis"
+                FontSize="18"
+                FontWeight="Light"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Foreground="#84a0ab" Margin="3,10,0,10"/>
+
+        </Border>
+
+        <Border Margin="159,331,423,24"
+                BorderThickness="1"
+                CornerRadius="5"
+                MouseLeave="select_Leave"
+                Background="#000000"
+                Opacity="0.7"
+                Name="dduDownloadLink"
+                MouseLeftButtonDown="dduDownloadLink_MouseLeftButtonDown"
+                MouseMove="dduDownloadLink_MouseMove">
+
+            <TextBlock Text="Run Display Driver Uninstaller"
+                FontFamily="/Fonts/#Dosis"
+                FontSize="10"
+                FontWeight="Light"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Foreground="#00ffd5"/>
+
+        </Border>
+        <Border 
+            MouseLeave="select_Leave"
+            Width="300"
+            Height="25"
+            x:Name="Panel1"
+            MouseMove="Panel1_MouseMove"
+            Margin="357,265,43,85"
+            CornerRadius="5"
+            Background="#2a6273"
+            Opacity="0.9">
+
+            <Border.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard Storyboard="{StaticResource PanelGrow}"/>
+                </EventTrigger>
+            </Border.Triggers>
+
+            <TextBlock
+                FontFamily="/Fonts/#Dosis"
+                FontSize="18"
+                FontWeight="Light"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Foreground="#ffffff" 
+                Height="28" 
+                Margin="17,-4,47,-4" 
+                Width="236"
+                Text="download the latest nvidia driver"
+                />
+
+        </Border>
+        <Border 
+            MouseLeave="select_Leave"
+            Margin="356,295,44,55"
+            CornerRadius="5"
+            Opacity="0.9"
+            Background="#2a6273"
+            x:Name="Panel2"
+            MouseMove="Panel2_MouseMove"
+            Width="300"
+            Height="25">
+            <Border.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard Storyboard="{StaticResource PanelGrow}"/>
+                </EventTrigger>
+            </Border.Triggers>
+
+            <TextBlock Text="extract the driver to a folder using 7zip"
+                FontFamily="/Fonts/#Dosis"
+                FontSize="18"
+                FontWeight="Light"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Foreground="#ffffff" Margin="18,0,-24,-23" Height="48" Width="306"/>
+
+        </Border>
+        <Border 
+            MouseLeave="select_Leave"
+            Width="300"
+            Height="25"
+            Margin="356,325,44,25"
+            Background="#2a6273"
+            CornerRadius="5"
+            Opacity="0.9"
+            x:Name="Panel3"
+            MouseMove="Panel3_MouseMove">
+            <Border.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard Storyboard="{StaticResource PanelGrow}"/>
+                </EventTrigger>
+            </Border.Triggers>
+
+            <TextBlock Text="rename the extracted driver folder to 'driver'"
+                FontFamily="/Fonts/#Dosis"
+                FontSize="16"
+                FontWeight="Light"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Foreground="#ffffff" Margin="9,-2,9,-1" Height="23" Width="266"/>
+
+        </Border>
+        <Border Margin="357,355,43,120"
+            CornerRadius="5"
+            MouseLeave="select_Leave"
+            Opacity="0.9"
+            Width="300"
+            Height="25"
+            Background="#2a6273"
+            x:Name="Panel4"
+            MouseMove="Panel4_MouseMove" Grid.RowSpan="2">
+            <Border.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard Storyboard="{StaticResource PanelGrow}"/>
+                </EventTrigger>
+            </Border.Triggers>
+
+            <TextBlock Text="move to folder to the root of your C Drive"
+                FontFamily="/Fonts/#Dosis"
+                FontSize="16"
+                FontWeight="Light"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Foreground="#ffffff" Margin="16,0,23,-15" Height="40" Width="261"/>
+
+        </Border>
+
+        <Border Margin="356,10,44,81"
+                BorderThickness="1"
+                CornerRadius="5"
+                Background="#000000"
+                Opacity="0.7"
+                x:Name="readyButton"
+                MouseLeftButtonDown="readyButton_MouseLeftButtonDown"
+                MouseMove="readyButton_MouseMove"
+                MouseLeave="select_Leave"
+                Grid.Row="1">
+
+            <TextBlock x:Name="readyButtonText"
+                       Text="Confirm"
+                       FontFamily="/Fonts/#Dosis"
+                       FontSize="10"
+                       FontWeight="Light"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Foreground="#00ffd5"/>
+
+        </Border>
+        <Border 
+            Margin="356,44,44,64"
+            BorderThickness="1"
+            CornerRadius="5"
+            Background="#ffffff"
+            Opacity="0.5" 
+            MouseLeave="select_Leave"
+            Grid.Row="1">
+
+            <TextBlock 
+                x:Name="validationText"
+                Text=""
+                FontFamily="/Fonts/#Dosis"
+                FontSize="10"
+                FontWeight="Light"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Foreground="#ff004c"/>
+
+        </Border>
+        <Border x:Name="DduPanel_Copy"
+            Margin="98,358,349,64"
+            CornerRadius="5"
+            MouseLeave="select_Leave"
+            Opacity="0.8"
+            Background="#121212"
+            MouseMove="DduPanel_MouseMove" Grid.RowSpan="2">
+            <Border.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard Storyboard="{StaticResource PanelOpaque}"/>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard Storyboard="{StaticResource PanelReturnOpacity}"/>
+                </EventTrigger>
+            </Border.Triggers>
+
+            <TextBlock Text="this tool works with any driver &#x0a;with a similar format to 471.41"
+                FontFamily="/Fonts/#Dosis"
+                FontSize="18"
+                FontWeight="Light"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Foreground="#84a0ab"/>
+
+        </Border>
+    </Grid>
+</UserControl>

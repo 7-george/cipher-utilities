@@ -1,0 +1,259 @@
+﻿<Window x:Class="Cipher_Utilities.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModel="clr-namespace:Cipher_Utilities.MVVM.ViewModel"
+        xmlns:local="clr-namespace:Cipher_Utilities"
+        mc:Ignorable="d"
+        Height="600" Width="920"
+        WindowStyle="none"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        AllowsTransparency="true">
+    <Window.Resources>
+        <Storyboard x:Key="FadeIn">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="00:00:00" BeginTime="00:00:00" From="1.0" To="0.0"/>
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="00:00:1" BeginTime="00:00:00" From="0.0" To="0.8"/>
+        </Storyboard>
+    </Window.Resources>
+
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
+
+
+
+    <Border x:Name="MainBackground" MouseMove="MainBackground_MouseMove" CornerRadius="10">
+
+        <Border.Background>
+            <LinearGradientBrush>
+                <GradientStop Color="#002b36" Offset=".2" />
+                <GradientStop x:Name="PurpleGradStop" Color="#6c71c4" Offset="1.0" />
+            </LinearGradientBrush>
+        </Border.Background>
+        <Border.Triggers>
+            <EventTrigger RoutedEvent="Loaded">
+                <BeginStoryboard>
+                    <Storyboard RepeatBehavior="Forever" AutoReverse="True">
+                        <DoubleAnimation Storyboard.TargetName="PurpleGradStop"
+                             Storyboard.TargetProperty="Offset"
+                             To="1.5"
+                             Duration="0:0:3" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Border.Triggers>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="495*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+
+
+            <TextBlock Text="Cipher Utilities"
+                       x:Name="cipherutils"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Foreground="#00fff7"
+                       FontSize="22"
+                       FontFamily="Fonts/#Dosis"
+                       Margin="20,24,0,23"/>
+
+            <StackPanel Grid.Row="1"
+                        x:Name="NavPanel"
+                        MouseMove="NavPanel_MouseMove"
+                        MouseLeave="NavPanel_MouseLeave"
+                        Opacity="0.8">
+                <StackPanel.Background>
+                    <RadialGradientBrush x:Name="NavPanelRadial" RadiusX="0.02">
+                        <GradientStop Color="#002b36" Offset="0.9"/>
+                        <GradientStop Color="#2aa198" Offset="0.1"/>
+                    </RadialGradientBrush>
+                </StackPanel.Background>
+                <StackPanel.Triggers>
+                    <EventTrigger RoutedEvent="Loaded">
+                        <BeginStoryboard Storyboard="{StaticResource FadeIn}">
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </StackPanel.Triggers>
+
+                <RadioButton Content="welcome"
+                             Height="50"
+                             Foreground="#84a0ab"
+                             FontFamily="/Fonts/#Dosis"
+                             FontWeight="DemiBold"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             IsChecked="True"
+                             Command="{Binding WelcomeViewCommand}"/>
+
+                <Border Height="1" Margin="50,0,0,0">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0.1,0.9" StartPoint="0.9,0">
+                            <GradientStop Color="#268bd2" Offset="0.9"/>
+                            <GradientStop Color="#2aa198"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+
+                <RadioButton Content="nvidia driver stripper"
+                             Height="50"
+                             Foreground="#84a0ab"
+                             FontFamily="/Fonts/#Dosis"
+                             FontWeight="DemiBold"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding NvDriverStripperViewCommand}"/>
+
+                <RadioButton Content="software collection"
+                             Height="50"
+                             Foreground="#84a0ab"
+                             FontFamily="/Fonts/#Dosis"
+                             FontWeight="DemiBold"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding MsiModeViewCommand}"/>
+                <Border Height="1" RenderTransformOrigin="0.5,0.5" Margin="50,0,0,0">
+                    <Border.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="-1"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Border.RenderTransform>
+
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0.1,0.9" StartPoint="0.9,0">
+                            <GradientStop Color="#268bd2" Offset="0.9"/>
+                            <GradientStop Color="#2aa198"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+
+                <RadioButton Content="temp file flusher"
+                             Height="50"
+                             Foreground="#84a0ab"
+                             FontFamily="/Fonts/#Dosis"
+                             FontWeight="DemiBold"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding DeepCleanViewCommand}"/>
+
+                <RadioButton Content="windows preferences"
+                             Height="50"
+                             Foreground="#84a0ab"
+                             FontFamily="/Fonts/#Dosis"
+                             FontWeight="DemiBold"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding WinPrefViewCommand}"/>
+                <Border Height="1" Margin="50,0,0,0">
+
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0.1,0.9" StartPoint="0.9,0">
+                            <GradientStop Color="#268bd2" Offset="0.9"/>
+                            <GradientStop Color="#2aa198"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+
+                <RadioButton Content="integer converter"
+                             Height="50"
+                             Foreground="#84a0ab"
+                             FontFamily="/Fonts/#Dosis"
+                             FontWeight="DemiBold"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding BinaryConverterViewCommand}"/>
+
+            </StackPanel>
+
+            <ContentControl Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="5,13,15,12"
+                            Content="{Binding CurrentView}"
+                            Width="700" Height="500" Grid.ColumnSpan="4"/>
+
+            <Border Name="dragBorder"
+                    CornerRadius="10" 
+                    Margin="40,0,75,62" Grid.ColumnSpan="2"
+                    MouseMove="dragBorder_MouseMove"
+                    MouseLeave="dragBorder_MouseLeave">
+
+                <Border.Background>
+                    <RadialGradientBrush x:Name="DragBorderRadial" RadiusX="0.5">
+                        <GradientStop Color="#6c71c4" Offset="0.7"/>
+                        <GradientStop Color="#268bd2" Offset="0.1"/>
+                    </RadialGradientBrush>
+                </Border.Background>
+            </Border>
+
+            <Border 
+                    Background="#2aa198"
+                    CornerRadius="2"
+                    Margin="0,6,33,58" HorizontalAlignment="Right" Width="13" Grid.Column="1"/>
+
+            <TextBlock Text="By George"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left"
+                Foreground="#2aa198"
+                FontSize="12"
+                FontFamily="Fonts/#Dosis"
+                Margin="20,49,0,10" Height="16"/>
+
+            <Border
+                Background="#5efff3"
+                CornerRadius="2"
+                Margin="0,2,29,62" HorizontalAlignment="Right" Width="13" Grid.Column="4"/>
+
+            <Border x:Name="maximizeButton"
+                    Background="Transparent"
+                    Margin="0,0,25,58" HorizontalAlignment="Right" Width="25" Grid.Column="1"/>
+            <Border x:Name="closeButton"
+                    Background="Transparent"
+                    Margin="0,0,0,58" HorizontalAlignment="Right" Width="25" Grid.Column="1"/>
+            <Border x:Name="minimizeButton"
+                    Background="Transparent"
+                    Margin="0,0,50,58" HorizontalAlignment="Right" Width="20" Grid.Column="1"/>
+            <Border 
+                Background="#5efff3"
+                CornerRadius="2"
+                Margin="0,6,51,64" HorizontalAlignment="Right" Width="19" Grid.Column="1"/>
+            <Border 
+                Background="#5efff3"
+                CornerRadius="0.5"
+                Margin="0,7,4,65" HorizontalAlignment="Right" Width="19" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
+                <Border.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-35.329"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Border.RenderTransform>
+            </Border>
+            <Border 
+                Background="#5efff3"
+                CornerRadius="0.5"
+                Margin="0,7,5,65" HorizontalAlignment="Right" Width="19" Grid.Column="1" RenderTransformOrigin="0.5,0.5">
+                <Border.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="35.329"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Border.RenderTransform>
+            </Border>
+
+        </Grid>
+    </Border>
+</Window>

@@ -1,0 +1,196 @@
+﻿<UserControl x:Class="Cipher_Utilities.MVVM.View.WelcomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Cipher_Utilities.MVVM.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="700"
+             Background="Transparent">
+
+    <UserControl.Resources>
+        <Storyboard x:Key="FadeIn">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="00:00:00" BeginTime="00:00:00" From="1.0" To="0.0"/>
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="00:00:0.25" BeginTime="00:00:00" From="0.0" To="1.0"/>
+        </Storyboard>
+        <Storyboard x:Key="WelcomeGrow">
+            <DoubleAnimation Storyboard.TargetProperty="(TextBlock.FontSize)"
+                             From="145"
+                             To="180"
+                             Duration="0:0:0.05" 
+                             AutoReverse="True"/>
+        </Storyboard>
+        <Storyboard x:Key="WaveGrow">
+            <DoubleAnimation Duration="0:0:6" From="400" To="440" AutoReverse="True" RepeatBehavior="Forever" Storyboard.TargetProperty="Height"/>
+        </Storyboard>
+    </UserControl.Resources>
+
+    <Grid SnapsToDevicePixels="True">
+        <Grid.Triggers>
+            <EventTrigger RoutedEvent="Loaded">
+                <BeginStoryboard Storyboard="{StaticResource FadeIn}"/>
+            </EventTrigger>
+        </Grid.Triggers>
+
+
+        <Border CornerRadius="10"
+            Margin="486,168,10,332"
+            Opacity="0.6">
+            <Border.Background>
+                <RadialGradientBrush RadiusY="0.573" RadiusX="0.667" GradientOrigin="1.01,1.035">
+                    <GradientStop Color="#00beff" Offset="0.81"/>
+                    <GradientStop Color="#FF0D60A3"/>
+                </RadialGradientBrush>
+            </Border.Background>
+        </Border>
+
+        <TextBlock Text="w"
+                   FontWeight="Heavy"
+                   FontFamily="/Fonts/#Dosis"
+                   FontSize="145"
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center" 
+                   Margin="68,156,526,161">
+            
+            <TextBlock.Foreground>
+                <RadialGradientBrush x:Name="gradRadial" RadiusX="0.25">
+                    <GradientStop Color="#00fff7" Offset="0.0"/>
+                    <GradientStop Color="#2163a6" Offset="1.0"/>
+                </RadialGradientBrush>
+            </TextBlock.Foreground>
+
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard Storyboard="{StaticResource WelcomeGrow}"/>
+                </EventTrigger>
+            </TextBlock.Triggers>
+        </TextBlock>
+        <TextBlock Text="e"
+            FontWeight="Heavy"
+            FontFamily="/Fonts/#Dosis"
+            FontSize="145"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Margin="174,156,449,161">
+
+            <TextBlock.Foreground>
+                <RadialGradientBrush x:Name="gradRadial1" RadiusX="0.25">
+                    <GradientStop Color="#6c71c4" Offset="0.0"/>
+                    <GradientStop Color="#2163a6" Offset="1.0"/>
+                </RadialGradientBrush>
+            </TextBlock.Foreground>
+
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard Storyboard="{StaticResource WelcomeGrow}"/>
+                </EventTrigger>
+            </TextBlock.Triggers>
+        </TextBlock>
+        <TextBlock Text="l"
+            FontWeight="Heavy"
+            FontFamily="/Fonts/#Dosis"
+            FontSize="145"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Margin="252,156,406,161">
+
+            <TextBlock.Foreground>
+                <RadialGradientBrush x:Name="gradRadial2" RadiusX="0.25">
+                    <GradientStop Color="#00fff7" Offset="0.0"/>
+                    <GradientStop Color="#2163a6" Offset="1.0"/>
+                </RadialGradientBrush>
+            </TextBlock.Foreground>
+
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard Storyboard="{StaticResource WelcomeGrow}"/>
+                </EventTrigger>
+            </TextBlock.Triggers>
+        </TextBlock>
+        <TextBlock Text="c"
+            FontWeight="Heavy"
+            FontFamily="/Fonts/#Dosis"
+            FontSize="145"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Margin="299,156,337,161">
+
+            <TextBlock.Foreground>
+                <RadialGradientBrush x:Name="gradRadial3" RadiusX="0.25">
+                    <GradientStop Color="#6c71c4" Offset="0.0"/>
+                    <GradientStop Color="#2163a6" Offset="1.0"/>
+                </RadialGradientBrush>
+            </TextBlock.Foreground>
+
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard Storyboard="{StaticResource WelcomeGrow}"/>
+                </EventTrigger>
+            </TextBlock.Triggers>
+        </TextBlock>
+        <TextBlock Text="o"
+            FontWeight="Heavy"
+            FontFamily="/Fonts/#Dosis"
+            FontSize="145"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Margin="370,156,260,161">
+
+            <TextBlock.Foreground>
+                <RadialGradientBrush x:Name="gradRadial4" RadiusX="0.25">
+                    <GradientStop Color="#00fff7" Offset="0.0"/>
+                    <GradientStop Color="#2163a6" Offset="1.0"/>
+                </RadialGradientBrush>
+            </TextBlock.Foreground>
+
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard Storyboard="{StaticResource WelcomeGrow}"/>
+                </EventTrigger>
+            </TextBlock.Triggers>
+        </TextBlock>
+        <TextBlock Text="m"
+            FontWeight="Heavy"
+            FontFamily="/Fonts/#Dosis"
+            FontSize="145"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Margin="446,156,140,161">
+
+            <TextBlock.Foreground>
+                <RadialGradientBrush x:Name="gradRadial5" RadiusX="0.25">
+                    <GradientStop Color="#6c71c4" Offset="0.0"/>
+                    <GradientStop Color="#2163a6" Offset="1.0"/>
+                </RadialGradientBrush>
+            </TextBlock.Foreground>
+
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard Storyboard="{StaticResource WelcomeGrow}"/>
+                </EventTrigger>
+            </TextBlock.Triggers>
+        </TextBlock>
+        <TextBlock Text="e"
+            FontWeight="Heavy"
+            FontFamily="/Fonts/#Dosis"
+            FontSize="145"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Margin="560,156,68,160">
+
+            <TextBlock.Foreground>
+                <RadialGradientBrush x:Name="gradRadial6" RadiusX="0.25">
+                    <GradientStop Color="#00fff7" Offset="0.0"/>
+                    <GradientStop Color="#2163a6" Offset="1.0"/>
+                </RadialGradientBrush>
+            </TextBlock.Foreground>
+
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard Storyboard="{StaticResource WelcomeGrow}"/>
+                </EventTrigger>
+            </TextBlock.Triggers>
+        </TextBlock>
+    </Grid>
+
+</UserControl>

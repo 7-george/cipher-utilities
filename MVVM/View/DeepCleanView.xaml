@@ -1,0 +1,96 @@
+﻿<UserControl x:Class="Cipher_Utilities.MVVM.View.DeepCleanView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Cipher_Utilities.MVVM.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="700"
+             Background="Transparent">
+    <UserControl.Resources>
+        <Storyboard x:Key="FadeIn">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="00:00:00" BeginTime="00:00:00" From="1.0" To="0.0"/>
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="00:00:0.25" BeginTime="00:00:00" From="0.0" To="1.0"/>
+        </Storyboard>
+    </UserControl.Resources>
+
+    <Grid Margin="10,0,10,315">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="628*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.Triggers>
+            <EventTrigger RoutedEvent="Loaded">
+                <BeginStoryboard Storyboard="{StaticResource FadeIn}"/>
+            </EventTrigger>
+        </Grid.Triggers>
+
+
+        <Border 
+            Opacity="0.9"
+            CornerRadius="5" 
+            Margin="22,22,25,0"
+            Background="#000022"/>
+        <Border 
+            Opacity="0.9"
+            CornerRadius="5" 
+            Margin="148,22,412,0"
+            Background="#000000"/>
+        <Border 
+            Opacity="0.9"
+            CornerRadius="5" 
+            Margin="538,22,22,0"
+            Background="#000000"/>
+        <Border 
+            Opacity="0.9"
+            CornerRadius="5" 
+            Margin="22,22,538,0"
+            Background="#000000"/>
+        <Border 
+            Opacity="0.9"
+            CornerRadius="5" 
+            Margin="273,22,272,0"
+            Background="#000000"/>
+        <Border 
+            Opacity="0.9"
+            CornerRadius="5" 
+            Margin="413,22,147,0"
+            Background="#000000"/>
+
+        <Border 
+            MouseMove="select_join"
+            MouseLeave="select_leave"
+            MouseDown="start_MouseDown"
+            Opacity="0.2"
+            CornerRadius="5" 
+            Margin="155,346,155,-284"
+            Background="White"/>
+        <TextBlock
+            x:Name="regain"
+            Text="56789MB"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="165"
+            Foreground="#C42847"
+            FontWeight="ExtraLight"
+            FontFamily="/Fonts/#Dosis" Margin="28,0,28,-24"/>
+        
+        <TextBlock x:Name="info"
+                   Text="worth of temporary files were found"
+                   FontWeight="Light"
+                   FontFamily="/Fonts/#Dosis"
+                   FontSize="41"
+                   Foreground="#00ffd5"
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center" Margin="22,190,22,-57"/>
+
+        <TextBlock MouseDown="start_MouseDown"
+                   Text="remove"
+                   MouseMove="select_join"
+                   MouseLeave="select_leave"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="50"
+                   Foreground="White" Margin="256,372,256,-251"/>
+    </Grid>
+</UserControl>

@@ -1,0 +1,187 @@
+﻿<UserControl x:Class="Cipher_Utilities.MVVM.View.MsiModeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Cipher_Utilities.MVVM.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="700"
+             Background="Transparent">
+
+    <UserControl.Resources>
+        <Storyboard x:Key="FadeIn">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="00:00:00" BeginTime="00:00:00" From="1.0" To="0.0"/>
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="00:00:0.25" BeginTime="00:00:00" From="0.0" To="1.0"/>
+        </Storyboard>
+        <Storyboard x:Key="SubTitleFlowingGradient" RepeatBehavior="Forever" AutoReverse="True">
+            <DoubleAnimation Storyboard.TargetName="TitleStop3"
+                             Storyboard.TargetProperty="Offset"
+                             To="1"
+                             Duration="0:0:10" />
+            <DoubleAnimation Storyboard.TargetName="TitleStop4"
+                             Storyboard.TargetProperty="Offset"
+                             BeginTime="0:0:10"
+                             To="1"
+                             Duration="0:0:10" />
+        </Storyboard>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="11*"/>
+            <RowDefinition Height="20*"/>
+        </Grid.RowDefinitions>
+        <Grid.Triggers>
+            <EventTrigger RoutedEvent="Loaded">
+                <BeginStoryboard Storyboard="{StaticResource FadeIn}"/>
+            </EventTrigger>
+        </Grid.Triggers>
+
+        <Border Grid.Row="1" 
+                Background="#4287f5"
+                Width="660"
+                CornerRadius="5" Margin="20,68,20,22">
+
+        </Border>
+
+        <TextBlock Grid.Row="0"
+                   Text="software collection"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Bottom"
+                   FontSize="85"
+                   Opacity="1.0"
+                   FontFamily="/Fonts/#Dosis"
+                   FontWeight="DemiBold"
+                   Foreground="#4287f5">
+        </TextBlock>
+
+        <StackPanel
+            x:Name="Panel"
+            Grid.Row="1"
+            Width="650"
+            Opacity="0.8" 
+            Margin="25,77,25,30"
+            Background="#85b4ff">
+            
+            <Border Background="Black"
+                    Height="26"
+                    CornerRadius="5"/>
+            <Image Source="/Images/saturn.png" Height="327" Margin="0,0,-376,0" Opacity="0.6"/>
+        </StackPanel>
+
+        <TextBlock Foreground="White"
+                    Text="Graphic Card Optimisations"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center" Margin="48,77,0,230" Grid.Row="1"/>
+
+        <Border x:Name="Rtss"
+            Background="White" 
+            Opacity="0.3"
+            Margin="25,203,480,30" 
+            Grid.Row="1"
+            CornerRadius="5"
+            MouseLeave="select_Leave"
+            MouseMove="select_Join"
+            MouseDown="Rtss_MouseDown">
+
+            <Image Source="/Images/rtss.png" Margin="0,10"/>
+        </Border>
+
+        <Border x:Name="Autoruns"
+            Background="White" 
+            Opacity="0.3"
+            Margin="225,108,225,125" 
+            Grid.Row="1"
+            MouseLeave="select_Leave"
+            MouseMove="select_Join"
+            CornerRadius="5"
+            MouseDown="Autoruns_MouseDown">
+
+            <Image Source="/Cipher Utilities;component/Images/Autoruns.png" RenderTransformOrigin="0.429,0.31"/>
+        </Border>
+
+        <Border x:Name="MsiAfterburner"
+            Background="White" 
+            Opacity="0.4"
+            Margin="480,108,25,125" 
+            Grid.Row="1"
+            CornerRadius="5"
+            MouseDown="MsiAfterburner_MouseDown"
+            MouseMove="select_Join"
+            MouseLeave="select_Leave">
+
+            <Image Source="/Images/afterburner.png"/>
+        </Border>
+        <Border x:Name="MsiMode"
+            Background="White" 
+            Opacity="0.3"
+            Margin="25,108,480,125" 
+            Grid.Row="1"
+            MouseMove="select_Join"
+            MouseLeave="select_Leave"
+            CornerRadius="5"
+            MouseDown="MsiMode_MouseDown">
+
+            <Image Source="/Cipher Utilities;component/Images/MsiModeUtil.png" Margin="10"/>
+        </Border>
+        <Border x:Name="Islc"
+            Background="White" 
+            Opacity="0.3"
+            MouseLeave="select_Leave"
+            MouseMove="select_Join"
+            Margin="225,203,225,30" 
+            Grid.Row="1"
+            CornerRadius="5"
+            MouseDown="Islc_MouseDown">
+
+            <Image Source="/Cipher Utilities;component/Images/Islc.png" RenderTransformOrigin="0.429,0.31" Margin="3,10,10,10"/>
+        </Border>
+        <Border x:Name="HwInfo"
+            Background="White" 
+            Opacity="0.4"
+            Margin="480,203,25,30" 
+            Grid.Row="1"
+            CornerRadius="5"
+            MouseDown="HwInfo_MouseDown"
+            MouseMove="select_Join"
+            MouseLeave="select_Leave">
+
+            <Image Source="/Cipher Utilities;component/Images/HwInfo.png"/>
+        </Border>
+        <TextBlock Foreground="White"
+            Text="Windows Optimisations"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center" Margin="285,77,0,230" Grid.Row="1"/>
+        <TextBlock Foreground="White"
+            Text="Hardware Monitoring"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center" Margin="521,77,0,230" Grid.Row="1"/>
+
+        <TextBlock
+            Text="Some apps are in 7zip SFX format"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            FontSize="12"
+            Opacity="1.0"
+            FontFamily="/Fonts/#Dosis"
+            FontWeight="DemiBold" Margin="259,0,281,320" Width="160" Grid.RowSpan="2">
+
+            <TextBlock.Foreground>
+                <LinearGradientBrush StartPoint="0,0"
+                    EndPoint="1,0">
+                    <GradientStop Offset="0"
+                        Color="#4287f5" />
+                    <GradientStop x:Name="TitleStop3"
+                        Offset="0"
+                        Color="#4287f5" />
+                    <GradientStop x:Name="TitleStop4"
+                        Offset="0"
+                        Color="#03d3fc" />
+                    <GradientStop Offset="1"
+                        Color="#03d3fc" />
+                </LinearGradientBrush>
+            </TextBlock.Foreground>
+        </TextBlock>
+
+    </Grid>
+</UserControl>
